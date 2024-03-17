@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <style>
+        .navbar-custom {
+            background-color: rgb(0, 106, 255);
+            /* Change this to any color you desire */
+        }
+
+        body {
+            color: #1a202c;
+            text-align: left;
+            background-color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+
+<header class="bg-light">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h6 class="display-6"> GRIDSCAPE</h6>
+            </a>
+
+            <div class="d-flex">
+                <!-- User profile button -->
+                <a href="/depRegistration" class="btn btn-primary me-2">Department Registration</a>
+                <a href="/profile" class="btn btn-primary me-2">Profile</a>
+                <!-- Logout button -->
+                <form action="/logout" method="get">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header"
+                         style="background-color: rgb(0, 204, 255); box-shadow: 10px 10px rgb(162, 164, 164);">
+                        <h5 style="text-align: center;">Department Registration</h5>
+                    </div>
+                    <div class="card-body"
+                         style="box-shadow: 10px 10px rgb(162, 164, 164);">
+                        <form id="depRegistrationForm" action="/depRegister" method="POST"
+                              enctype="multipart/form-data" class="row g-3">
+                            <div class="col-md-12">
+                                <label for="depname" class="form-label">Name</label> <input
+                                        type="text" class="form-control" id="depname" name="depname">
+                                <div id="depnameError" class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label">Email</label> <input
+                                        type="email" class="form-control" id="inputEmail4"
+                                        name="email">
+                                <div id="emailError" class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="mobileno" class="form-label">Mobile No</label> <input
+                                        type="text" class="form-control" id="mobileno"
+                                        name="mobileno">
+                                <div id="mobilenoError" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-group d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" name="register"
+                                        class="btn btn-outline-primary">Register
+                                </button>
+                                <a href="/list" class="btn btn-warning mx-3">Back to Employee List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div
+            style="background-color: black; bottom: 0; position: fixed; left: 0; bottom: 0; width: 100%; text-align: center; color: aliceblue;">
+        <p>
+            <b>Copyright @2024</b>
+        </p>
+    </div>
+</footer>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#depRegistrationForm').submit(function (event) {
+            var valid = true;
+
+            $('.invalid-feedback').text('');
+
+            $('.form-control').removeClass('is-invalid');
+
+            if ($('#depname').val().trim() === '') {
+                $('#depname').addClass('is-invalid');
+                $('#depnameError').text('Name is required.');
+                valid = false;
+            }
+
+            if ($('#inputEmail4').val().trim() === '') {
+                $('#inputEmail4').addClass('is-invalid');
+                $('#emailError').text('Email is required.');
+                valid = false;
+            }
+
+            if ($('#mobileno').val().trim() === '') {
+                $('#mobileno').addClass('is-invalid');
+                $('#mobilenoError').text('Mobile No is required.');
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+</body>
+</html>
