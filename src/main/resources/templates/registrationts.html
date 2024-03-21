@@ -222,31 +222,19 @@
                 $('#passwordError').text('Password is required.');
                 valid = false;
             }
-            if ($('#inputCity').val().trim() === '') {
-                $('#inputCity').addClass('is-invalid');
-                $('#cityError').text('City is required.');
-                valid = false;
-            }
+           
             if ($('#inputMobile').val().trim() === '') {
                 $('#inputMobile').addClass('is-invalid');
                 $('#mobileNoError').text('Mobile is required.');
                 valid = false;
             }
-            if ($('#inputCountry').val().trim() === '') {
-                $('#inputCountry').addClass('is-invalid');
-                $('#countryError').text('Country is required.');
-                valid = false;
-            }
+           
             if ($('#inputDate').val().trim() === '') {
                 $('#inputDate').addClass('is-invalid');
                 $('#dateError').text('date is required.');
                 valid = false;
             }
-            if ($('#inputDesignation').val().trim() === '') {
-                $('#inputDesignation').addClass('is-invalid');
-                $('#designationError').text('Designation is required.');
-                valid = false;
-            }
+           
 
             if (!valid) {
                 event.preventDefault();
