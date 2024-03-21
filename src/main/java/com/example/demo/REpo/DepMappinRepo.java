@@ -17,4 +17,6 @@ public interface DepMappinRepo extends JpaRepository<DepMapping, Long> {
 
 	List<DepMapping> findByEmailStatus(boolean emailStatus);
 
+	List<DepMapping> findByDepart(Depart depart);
+
 }

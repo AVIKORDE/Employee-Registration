@@ -30,40 +30,44 @@ public class DepDService {
 
 	}
 
-	
-
-	public void updateDepMapping(Long departmentId, Long employeeId ) {
+	public void updateDepMapping(Long departmentId, Long employeeId) {
 		Depart depart = depRepo.getById(departmentId);
 		Optional<User> user = userRepo.findById(employeeId);
-		Optional<DepMapping> depmapping = depMappinRepo.findByDepartAndUser(depart,user.get());
+		Optional<DepMapping> depmapping = depMappinRepo.findByDepartAndUser(depart, user.get());
 		if (depmapping.isPresent()) {
 			depMappinRepo.deleteById(depmapping.get().getId());
 			DepMapping dep = new DepMapping();
 			dep.setDepart(depart);
-			
+
 			dep.setUser(user.get());
-			
 
 			depMappinRepo.save(dep);
 		} else {
-			
+
 			DepMapping dep = new DepMapping();
 			dep.setDepart(depart);
-			
+
 			dep.setUser(user.get());
-			
 
 			depMappinRepo.save(dep);
 		}
 
 	}
 
-
-
 	public List<Depart> findAll() {
-		List<Depart> depart=depRepo.findAll();
+		List<Depart> depart = depRepo.findAll();
 		return depart;
 	}
-	
+
+	public List<DepMapping> findByDepart(Depart depart) {
+		List<DepMapping> depmapping = depMappinRepo.findByDepart(depart);
+		return depmapping;
+	}
+
+	public Optional<Depart> getByDepartmentName(String departmentName) {
+		Optional<Depart> departnment = depRepo.findByDepartmentName(departmentName);
+
+		return departnment;
+	}
 
 }

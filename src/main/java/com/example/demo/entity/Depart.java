@@ -42,5 +42,6 @@ public class Depart {
 		this.email = email;
 	}
 	
+	
 
 }

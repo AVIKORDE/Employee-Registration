@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.spring6.processor.SpringUErrorsTagProcessor;
@@ -238,5 +240,34 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
+	@GetMapping("/employees")
+    public ResponseEntity<List<Object>> getEmployeesByDepartment(@RequestParam("department") String departmentName) {
+        Optional<Depart> department = depDService.getByDepartmentName(departmentName);
+
+        List<Object> obj = new ArrayList<>();
+
+        if (department.isPresent()) {
+            List<DepMapping> depMappings = depDService.findByDepart(department.get());
+            for (DepMapping depMapping : depMappings) {
+                User user = depMapping.getUser();
+                if (user != null) {
+                    User newUser = new User();
+                    newUser.setId(user.getId());
+                    newUser.setName(user.getName());
+                    newUser.setCity(user.getCity());
+                    newUser.setCountry(user.getCountry());
+                    newUser.setDateofbirth(user.getDateofbirth());
+                    newUser.setDesignation(user.getDesignation());
+                    newUser.setEmail(user.getEmail());
+                    newUser.setUsername(user.getUsername());
+                    newUser.setMobileno(user.getMobileno());
+                    obj.add(newUser);
+                }
+            }
+        }
+
+        return ResponseEntity.ok(obj);
+    }
+
 
 }
